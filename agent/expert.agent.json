@@ -1,0 +1,43 @@
+{
+  "id": "expert",
+  "title": "Агент «Эксперт» (координатор)",
+  "role": "Собирает оценки остальных агентов, взвешивает их по приоритету клиента и формирует итоговый рейтинг с объяснением выбора.",
+  "kind": "coordinator",
+  "skill": null,
+  "weight": 0.0,
+  "enabled": true,
+  "aggregation": "weighted_sum",
+  "formula": "итог = Σ(оценка агента × вес) / Σвесов, итог нормирован к 0–100",
+  "output": "топ-N автомобилей с итоговой оценкой и причинами",
+  "selection": {
+    "min_group_size": 4,
+    "top_n": 10
+  },
+  "priority_profiles": {
+    "balanced": {
+      "title": "Сбалансированный подбор",
+      "hint": "Все факторы примерно равнозначны",
+      "weights": { "budget": 0.30, "mileage": 0.30, "reliability": 0.25, "market": 0.15 }
+    },
+    "economy": {
+      "title": "Важнее цена и запас бюджета",
+      "hint": "Клиент экономит: решающее слово за агентом «Бюджет»",
+      "weights": { "budget": 0.45, "mileage": 0.15, "reliability": 0.15, "market": 0.25 }
+    },
+    "low_mileage": {
+      "title": "Важнее небольшой пробег",
+      "hint": "Машина с минимальным износом",
+      "weights": { "budget": 0.15, "mileage": 0.50, "reliability": 0.20, "market": 0.15 }
+    },
+    "reliability": {
+      "title": "Важнее надёжность",
+      "hint": "Минимум расходов на обслуживание и ремонт",
+      "weights": { "budget": 0.15, "mileage": 0.20, "reliability": 0.45, "market": 0.20 }
+    },
+    "market": {
+      "title": "Важнее выгодная цена",
+      "hint": "Ищем недооценённые рынком варианты",
+      "weights": { "budget": 0.20, "mileage": 0.20, "reliability": 0.15, "market": 0.45 }
+    }
+  }
+}
