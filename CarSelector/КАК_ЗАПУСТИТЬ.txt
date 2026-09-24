@@ -1,0 +1,46 @@
+CarSelector — как запустить эту копию проекта
+=============================================
+
+Код скопирован БЕЗ виртуального окружения (папка .venv не переносится: внутри неё
+прописаны абсолютные пути). Поэтому окружение нужно создать заново — один раз.
+
+Откройте PowerShell в этой папке и выполните по очереди:
+
+1) Создать окружение.
+   Путь к Python указан полностью: обычный "python" на этой машине — заглушка
+   Microsoft Store и завершается с ошибкой 9009.
+
+   C:\Users\mutel\AppData\Local\Python\pythoncore-3.14-64\python.exe -m venv .venv
+
+2) Установить зависимости (Flet, pandas, openpyxl, pytest):
+
+   .venv\Scripts\python.exe -m pip install -r requirements.txt
+
+3) Запустить приложение:
+
+   .venv\Scripts\python.exe src\main.py
+
+Дополнительно
+-------------
+Проверить приложение без открытия окна (9 проверок):
+
+   $env:CARSELECTOR_HEADLESS=1; .venv\Scripts\python.exe scripts\smoke_check.py
+
+Прогнать тесты (65 штук):
+
+   .venv\Scripts\python.exe -m pytest tests -q
+
+Пересоздать демо-набор data\cars.csv:
+
+   .venv\Scripts\python.exe scripts\make_demo_data.py
+
+Где что лежит
+-------------
+Оформление и цвета (вся палитра в одном файле) ... src\ui\theme.py
+Паспорта ИИ-агентов .............................. .agent\*.agent.json
+Скиллы агентов ................................... .skill\<имя>\SKILL.md, skill.py
+Алгоритм подбора ................................. src\orchestrator.py
+Проверка данных через pandas ..................... src\data_loader.py
+Дашборд и статистика ............................. src\dashboard.py
+Описание проекта (ТЗ) ............................ SPEC.md
+Журнал разработки ................................ DEV-JOURNAL.md
